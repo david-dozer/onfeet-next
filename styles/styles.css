@@ -3891,6 +3891,12 @@ textarea.form-control-lg {
   flex-basis: 100%;
   flex-grow: 1;
   align-items: center;
+  overflow: hidden;
+  transition: max-height 0.9s ease-in-out;
+}
+
+.navbar-collapse.show {
+    max-height: 500px; /* Adjust to fit your content */
 }
 
 .navbar-toggler {
@@ -3954,6 +3960,7 @@ textarea.form-control-lg {
   .navbar-expand-sm .navbar-collapse {
     display: flex !important;
     flex-basis: auto;
+    transition: max-height 0.5s ease-in-out;
   }
   .navbar-expand-sm .navbar-toggler {
     display: none;
@@ -4001,6 +4008,7 @@ textarea.form-control-lg {
   .navbar-expand-md .navbar-collapse {
     display: flex !important;
     flex-basis: auto;
+    transition: 0.5s ease-in-out;
   }
   .navbar-expand-md .navbar-toggler {
     display: none;
@@ -4048,9 +4056,11 @@ textarea.form-control-lg {
   .navbar-expand-lg .navbar-collapse {
     display: flex !important;
     flex-basis: auto;
+    transition: 0.5s ease-in-out;
   }
   .navbar-expand-lg .navbar-toggler {
     display: none;
+    transition: 0.5s ease-in-out;
   }
   .navbar-expand-lg .offcanvas {
     position: static;
