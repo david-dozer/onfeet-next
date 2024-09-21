@@ -11395,4 +11395,38 @@ h1 {
   }
 }
 
+.dropdown-menu {
+  background-color: rgba(0, 0, 0, 0.8);
+  border: none;
+  padding: 10px;
+  max-width: 700px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  color: #f8f9fa;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dropdown-item img.thumbnail {
+  width: 80px;
+  height: auto;
+  margin-right: 15px;
+}
+
+.dropdown-item h4 {
+  color: #f8f9fa;
+  margin: 0;
+}
+
+.dropdown-item p {
+  margin: 0;
+  color: #adb5bd;
+}
+
+
 

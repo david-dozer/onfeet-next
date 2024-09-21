@@ -6,10 +6,10 @@ const TryMe = () => {
     <div className="masthead">  {/* Apply masthead class for the background */}
       <div className="container d-flex h-100 align-items-center justify-content-center">
         <div className="text-center">
-          <h1 className="mx-auto my-0 text-uppercase">Welcome to the Try Me Page!</h1>
-          <p>Feel free to experiment here!</p>
+          <h2 className="text-white-60 mx-auto mt-2 mb-5">Feel free to experiment here!</h2>
         </div>
       </div>
+
     </div>
   );
 };
