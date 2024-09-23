@@ -1,7 +1,7 @@
-const { NextResponse } = require('next/server');
-const SneaksAPI = require('changed-sneaks-api'); // Use require to import sneaks-api
+import { NextResponse } from 'next/server';
+import SneaksAPI from 'changed-sneaks-api';
 
-const sneaks = new SneaksAPI(); // Initialize the API
+const sneaks = new SneaksAPI();
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);

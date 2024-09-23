@@ -45,6 +45,15 @@ const Navbar = () => {
     }
   };
 
+  const handleExploreClick = (e) => {
+    e.preventDefault();
+    const searchBar = document.getElementById('search-bar');
+    if (searchBar) {
+      searchBar.value = '';
+    }
+    router.push('/try-me', undefined, { shallow: false });
+  };
+
   useEffect(() => {
     // Navbar shrink function
     const navbarShrink = () => {
@@ -87,9 +96,7 @@ const Navbar = () => {
               <span className="nav-link" onClick={handleAboutClick} style={{ cursor: 'pointer' }}>ABOUT</span>
             </li>
             <li className="nav-item">
-              <Link href="/try-me" legacyBehavior>
-                <a className="nav-link">EXPLORE</a>
-              </Link>
+              <span className="nav-link" onClick={handleExploreClick} style={{ cursor: 'pointer' }}>EXPLORE</span>
             </li>
           </ul>
         </div>
