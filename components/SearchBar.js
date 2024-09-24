@@ -26,12 +26,12 @@ const SearchBar = () => {
   };
 
   const handleProductClick = (product) => {
-    // Navigate to Sneaker.js with the product details passed as query parameters
-    router.push({
-      pathname: '/sneaker',
-      query: { image: product.thumbnail, name: product.shoeName },
+    // Pass the product data in the router's state, not in the URL
+    router.push(`/sneakers/${product._id}`, {
+      state: { product },  // Pass the whole product object in the state
     });
   };
+  
 
   return (
     <div className="search">
