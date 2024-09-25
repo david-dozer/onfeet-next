@@ -1,51 +1,58 @@
 "use client";
 
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';  // Use next/navigation for search params
 
-const SneakerPage = () => {
+const ShoeDetail = () => {
   const router = useRouter();
-  const [sneaker, setSneaker] = useState(null);
+  const searchParams = useSearchParams();  // Use search params to extract the URL
+  const [product, setProduct] = useState(null);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    // Check if sneaker data is passed in the router state
-    if (router?.state?.product) {
-      setSneaker(router.state.product);
-    } else {
-      // Handle the case where the user navigates directly to the URL without state
-      // You can either redirect them back or fetch the data from your backend
-      const id = router.query.id; // This gets the ID from the URL
-      // Perform API call to fetch the sneaker by ID if no state is available
-      fetch(`/api/sneakers/${id}`)
-        .then((res) => res.json())
-        .then((data) => setSneaker(data))
-        .catch((err) => console.error('Failed to fetch sneaker:', err));
-    }
+    const fetchProduct = async () => {
+      // Extract the id from the URL directly
+      const pathname = router.pathname;
+      console.log(pathname);
+      const id = searchParams.get('id'); // Get the last part of the URL
+
+      if (id) {
+        try {
+          const response = await fetch(`/api/sneakers/${id}`);
+          if (!response.ok) {
+            throw new Error('Failed to fetch product data');
+          }
+          const data = await response.json();
+          setProduct(data);
+        } catch (err) {
+          setError(err.message);
+        }
+      }
+    };
+
+    fetchProduct();
   }, [router]);
 
-  if (!sneaker) {
-    return <div>Loading...</div>;
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
+  if (!product) {
+    return <p>Loading...</p>;
   }
 
   return (
-    <div className="sneaker-details">
-      <nav>
-        {/* Your navbar */}
-        <a href="/">onFeet</a>
-        <a href="/about">ABOUT</a>
-        <a href="/explore">EXPLORE</a>
-      </nav>
-      <div className="container text-center">
-        <h1>{sneaker.shoeName}</h1>
-        <img src={sneaker.thumbnail} alt={sneaker.shoeName} className="img-fluid" />
-        <p>{sneaker.description}</p>
-        <h3>Resell Prices</h3>
-        <p>StockX: ${sneaker.lowestResellPrice.stockX}</p>
-        <p>FlightClub: ${sneaker.lowestResellPrice.flightClub}</p>
-        <p>GOAT: ${sneaker.lowestResellPrice.goat}</p>
-      </div>
+    <div>
+      <h1>{product.shoeName}</h1>
+      <img src={product.thumbnail} alt={product.shoeName} />
+      <p>{product.description}</p>
+      <p>Brand: {product.make}</p>
+      <p>Colorway: {product.colorway}</p>
+      <p>Retail Price: ${product.retailPrice}</p>
+      <p>Release Date: {product.releaseDate}</p>
+      {/* You can display more product details here */}
     </div>
   );
 };
 
-export default SneakerPage;
+export default ShoeDetail;

@@ -25,11 +25,25 @@ const SearchBar = () => {
     }
   };
 
-  const handleProductClick = (product) => {
-    // Pass the product data in the router's state, not in the URL
-    router.push(`/sneakers/${product._id}`, {
-      state: { product },  // Pass the whole product object in the state
+  const handleProductClick = async (product) => {
+    console.log('Product clicked:', product);
+
+    // Send the product data to the API
+    const response = await fetch(`/api/sneakers/${product._id}`, {
+      method: 'POST',  // POST to send the product data
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(product),  // Send the full product data to the API
     });
+
+    if (response.ok) {
+      // Redirect to the shoe details page once the data has been passed
+      console.log('Product posted successfully:', product); // Log the success message
+      router.push(`/shoe/${product._id}`);
+    } else {
+      console.error('Failed to send product data to the API');
+    }
   };
   
 
