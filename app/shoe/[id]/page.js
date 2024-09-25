@@ -1,37 +1,44 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';  // Use next/navigation for search params
+import { usePathname } from 'next/navigation';  // Use usePathname to get the current URL pathname
 
 const ShoeDetail = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();  // Use search params to extract the URL
+  const pathname = usePathname();  // Get the current pathname
   const [product, setProduct] = useState(null);
   const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchProduct = async () => {
-      // Extract the id from the URL directly
-      const pathname = router.pathname;
-      console.log(pathname);
-      const id = searchParams.get('id'); // Get the last part of the URL
+      // Extract the id from the URL
+      const id = pathname?.split('/').pop(); // Extract the id from the pathname
 
-      if (id) {
-        try {
-          const response = await fetch(`/api/sneakers/${id}`);
-          if (!response.ok) {
-            throw new Error('Failed to fetch product data');
-          }
-          const data = await response.json();
-          setProduct(data);
-        } catch (err) {
-          setError(err.message);
+      // Ensure that the id is valid
+      if (!id) {
+        setError('Invalid ID: could not extract ID from URL');
+        return;
+      }
+
+      try {
+        // Fetch the product data
+        const response = await fetch(`/api/sneakers/${id}`);
+
+        if (!response.ok) {
+          throw new Error(`Failed to fetch product: ${response.status}`);
         }
+
+        const data = await response.json();
+        setProduct(data);  // Set the fetched product data in state
+      } catch (err) {
+        setError(err.message);
       }
     };
 
-    fetchProduct();
-  }, [router]);
+    // Only call fetchProduct when pathname is available
+    if (pathname) {
+      fetchProduct();
+    }
+  }, [pathname]);  // Effect runs when pathname changes
 
   if (error) {
     return <p>Error: {error}</p>;
@@ -50,7 +57,7 @@ const ShoeDetail = () => {
       <p>Colorway: {product.colorway}</p>
       <p>Retail Price: ${product.retailPrice}</p>
       <p>Release Date: {product.releaseDate}</p>
-      {/* You can display more product details here */}
+      {/* Display more product details as needed */}
     </div>
   );
 };
