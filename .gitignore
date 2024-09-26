@@ -9,6 +9,9 @@
 # testing
 /coverage
 
+# SQLite database
+database/sneakers.db
+
 # next.js
 /.next/
 /out/
