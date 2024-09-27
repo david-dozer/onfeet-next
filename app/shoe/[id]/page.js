@@ -51,12 +51,13 @@ const ShoeDetail = () => {
 
   return (
     <div className="shoe-detail-container">
-      <h1>{product.shoeName}</h1>
+      {/* <h1>{product.shoeName}</h1> */}
       <img 
         src={product.thumbnail} 
         alt={product.shoeName} 
         className="shoe-image"
       />
+      <p>{product.shoeName}</p>
       <p>Retail Price: ${product.retailPrice}</p>
       <p>Release Date: {product.releaseDate}</p>
     </div>
