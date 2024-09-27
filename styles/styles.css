@@ -11006,8 +11006,8 @@ body {
 #mainNav .navbar-toggler {
   font-size: 80%;
   padding: 0.75rem;
-  color: #64a19d;
-  border: 1px solid #64a19d;
+  color: var(--bs-green);
+  border: 1px solid var(--bs-green);
 }
 #mainNav .navbar-toggler:focus {
   outline: none;
@@ -11433,8 +11433,60 @@ body {
   width: auto;
   height: auto;
   object-fit: contain; /* Ensure the image maintains its aspect ratio */
-  margin-top: 350px; /* Adjust this value to move the image down */
+  margin-top: 450px; /* Adjust this value to move the image down */
 }
+
+/* SIDEBAR STYLING */
+.sidebar {
+  width: 50px; /* Width when collapsed */
+  height: 50px;
+  background-color: #f0f0f0; /* Light background */
+  position: absolute; /* Keep it fixed on the right */
+  right: 0; /* Align it to the right */
+  top: 270px; /* Start below the navbar */
+  transition: width 0.3s ease; /* Transition effect for width */
+  overflow-y: auto; /* Enable vertical scrolling */
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Optional shadow for effect */
+  z-index: 1000; /* Ensure it is above other content */
+}
+
+.sidebar.expanded {
+  width: 250px; /* Width when expanded */
+  height: calc(100vh - 200px); /* Full height minus navbar height */
+  top: 90px;
+}
+
+.toggle {
+  cursor: pointer;
+  font-size: 24px; /* Adjust size */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px; /* Height of toggle button */
+  background-color: #ccc; /* Background color for toggle */
+}
+
+.content {
+  padding: 10px; /* Padding for the content inside the sidebar */
+}
+
+.checkbox-group,
+.pants-options,
+.socks-options {
+  margin: 10px 0; /* Spacing */
+}
+
+h4, h5 {
+  margin: 10px 0; /* Spacing for headings */
+}
+
+
+
+
+
+
+
+
 
 
 

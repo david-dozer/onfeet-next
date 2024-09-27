@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';  // Use usePathname to get the current URL pathname
+import SideBar from '../../../components/Sidebar'
 
 const ShoeDetail = () => {
   const pathname = usePathname();  // Get the current pathname
@@ -51,7 +52,7 @@ const ShoeDetail = () => {
 
   return (
     <div className="shoe-detail-container">
-      {/* <h1>{product.shoeName}</h1> */}
+      <SideBar /> {/* Include the sidebar here */}
       <img 
         src={product.thumbnail} 
         alt={product.shoeName} 
@@ -59,7 +60,7 @@ const ShoeDetail = () => {
       />
       <p>{product.shoeName}</p>
       <p>Retail Price: ${product.retailPrice}</p>
-      <p>Release Date: {product.releaseDate}</p>
+      {/* <p>Release Date: {product.releaseDate}</p> */}
     </div>
   );
   
