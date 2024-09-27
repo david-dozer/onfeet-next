@@ -11454,6 +11454,7 @@ body {
   width: 250px; /* Width when expanded */
   height: calc(100vh - 200px); /* Full height minus navbar height */
   top: 90px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.8) 75%, #000 100%);
 }
 
 .toggle {
@@ -11463,7 +11464,8 @@ body {
   justify-content: center;
   align-items: center;
   height: 50px; /* Height of toggle button */
-  background-color: #ccc; /* Background color for toggle */
+  background: rgba(0,0,0,0.9) 75%;
+  color: #cccad4;
 }
 
 .content {
@@ -11474,10 +11476,12 @@ body {
 .pants-options,
 .socks-options {
   margin: 10px 0; /* Spacing */
+  color: #f8f9fa;
 }
 
 h4, h5 {
   margin: 10px 0; /* Spacing for headings */
+  color: #f8f9fa;
 }
 
 
