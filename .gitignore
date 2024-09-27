@@ -6,11 +6,18 @@
 .pnp.js
 .yarn/install-state.gz
 
+# public
+public/shoe
+
 # testing
 /coverage
 
 # SQLite database
 database/sneakers.db
+
+#python
+output_image.png
+backend/__pycache__
 
 # next.js
 /.next/
@@ -30,6 +37,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
+/.venv/
 
 # vercel
 .vercel

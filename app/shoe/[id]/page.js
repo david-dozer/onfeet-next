@@ -1,3 +1,6 @@
+// app/shoe/[id]/page.js
+"use client";
+
 "use client";
 
 import { useEffect, useState } from 'react';
@@ -7,6 +10,7 @@ const ShoeDetail = () => {
   const pathname = usePathname();  // Get the current pathname
   const [product, setProduct] = useState(null);
   const [error, setError] = useState('');
+  const [imageWithBgRemoved, setImageWithBgRemoved] = useState(null); // State to store image with background removed
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -29,6 +33,9 @@ const ShoeDetail = () => {
 
         const data = await response.json();
         setProduct(data);  // Set the fetched product data in state
+
+        // Once the product is fetched, automatically remove the background
+        await handleRemoveBackground(data.thumbnail);
       } catch (err) {
         setError(err.message);
       }
@@ -40,6 +47,25 @@ const ShoeDetail = () => {
     }
   }, [pathname]);  // Effect runs when pathname changes
 
+  const handleRemoveBackground = async (imageUrl) => {
+    try {
+      const response = await fetch('http://localhost:5000/remove-bg', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ image_url: imageUrl }),
+      });
+
+      if (!response.ok) throw new Error("Failed to remove background");
+
+      const data = await response.json();
+      setImageWithBgRemoved(data.output_image);  // Use the fixed path
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   if (error) {
     return <p>Error: {error}</p>;
   }
@@ -49,17 +75,26 @@ const ShoeDetail = () => {
   }
 
   return (
-    <div>
+    <div className="shoe-detail-container">
       <h1>{product.shoeName}</h1>
-      <img src={product.thumbnail} alt={product.shoeName} />
-      <p>{product.description}</p>
-      <p>Brand: {product.make}</p>
-      <p>Colorway: {product.colorway}</p>
+      {imageWithBgRemoved ? (
+        <img 
+          src={imageWithBgRemoved} 
+          alt={product.shoeName} 
+          className="shoe-image"
+        />
+      ) : (
+        <img 
+          src={product.thumbnail} 
+          alt={product.shoeName} 
+          className="shoe-image"
+        />
+      )}
       <p>Retail Price: ${product.retailPrice}</p>
       <p>Release Date: {product.releaseDate}</p>
-      {/* Display more product details as needed */}
     </div>
   );
 };
 
 export default ShoeDetail;
+
