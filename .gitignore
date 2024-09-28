@@ -12,8 +12,9 @@ public/shoe
 # testing
 /coverage
 
-# # SQLite database
-# database/sneakers.db
+# SQLite database
+database/sneakers.db
+
 
 #python
 output_image.png
