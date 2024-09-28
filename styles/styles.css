@@ -11416,6 +11416,7 @@ body {
   cursor: pointer;
 }
 
+/* ------------------------------------------------- */
 /* SNEAKER STYLING PAGE STYLING */
 .shoe-detail-container {
   height: 100vh;
@@ -11428,12 +11429,13 @@ body {
 }
 
 .shoe-image {
-  max-width: 400px;
+  max-width: 195px;
   max-height: 200px;
+  position: absolute;
   width: auto;
   height: auto;
   object-fit: contain; /* Ensure the image maintains its aspect ratio */
-  margin-top: 370px; /* Adjust this value to move the image down */
+  margin-top: 380px; /* Adjust this value to move the image down */
 }
 
 /* SIDEBAR STYLING */
@@ -11479,10 +11481,24 @@ body {
   color: #f8f9fa;
 }
 
+.shoe-detail-container p {
+  margin-bottom : -550px;
+}
+
 h4, h5 {
   margin: 10px 0; /* Spacing for headings */
   color: #f8f9fa;
 }
+
+.pants-image {
+  max-width: 200px; /* Set the desired size for the pants image */
+  height: auto; /* Maintain aspect ratio */
+  position: absolute; /* Position it absolutely */
+  top: 100px; /* Adjust this value to position above the shoe */
+  margin-left: -150px; /* Adjust this value to move it further left */
+  z-index: 10; /* Ensure it's above the shoe image */
+}
+
 
 
 

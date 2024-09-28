@@ -54,6 +54,11 @@ const ShoeDetail = () => {
     <div className="shoe-detail-container">
       <SideBar /> {/* Include the sidebar here */}
       <img 
+        src="/pants/pants.png" // Path to the pants image in the public folder
+        alt="Pants"
+        className="pants-image" // Add class for styling
+      />
+      <img 
         src={product.thumbnail} 
         alt={product.shoeName} 
         className="shoe-image"

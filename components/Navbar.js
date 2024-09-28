@@ -96,7 +96,7 @@ const Navbar = () => {
               <span className="nav-link" onClick={handleAboutClick} style={{ cursor: 'pointer' }}>ABOUT</span>
             </li>
             <li className="nav-item">
-              <span className="nav-link" onClick={handleExploreClick} style={{ cursor: 'pointer' }}>EXPLORE</span>
+              <span className="nav-link" onClick={handleExploreClick} style={{ cursor: 'pointer' }}>SEARCH</span>
             </li>
           </ul>
         </div>
