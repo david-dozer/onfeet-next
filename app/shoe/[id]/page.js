@@ -59,7 +59,7 @@ const ShoeDetail = () => {
         className="shoe-image"
       />
       <p>{product.shoeName}</p>
-      <p>Retail Price: ${product.retailPrice}</p>
+      {/* <p>Retail Price: ${product.retailPrice}</p> */}
       {/* <p>Release Date: {product.releaseDate}</p> */}
     </div>
   );

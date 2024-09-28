@@ -11433,7 +11433,7 @@ body {
   width: auto;
   height: auto;
   object-fit: contain; /* Ensure the image maintains its aspect ratio */
-  margin-top: 450px; /* Adjust this value to move the image down */
+  margin-top: 370px; /* Adjust this value to move the image down */
 }
 
 /* SIDEBAR STYLING */
