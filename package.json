@@ -7,7 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "color-wheel": "node"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
@@ -16,6 +17,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@uiw/react-color-wheel": "^2.3.2",
     "better-sqlite3": "^11.3.0",
     "bootstrap": "^5.3.3",
     "changed-sneaks-api": "^1.2.0",
@@ -26,8 +28,8 @@
     "react": "^18",
     "react-color": "^2.19.3",
     "react-dom": "^18",
-    "react-router-dom": "^6.26.2",
     "react-scroll": "^1.9.0",
+    "react-spinners": "^0.14.1",
     "sneaks-api": "^1.2.3",
     "web-vitals": "^2.1.4"
   },

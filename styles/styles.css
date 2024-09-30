@@ -11429,7 +11429,7 @@ body {
 }
 
 .shoe-image {
-  max-width: 195px;
+  max-width: 185px;
   max-height: 200px;
   position: absolute;
   width: auto;
@@ -11453,9 +11453,9 @@ body {
 }
 
 .sidebar.expanded {
-  width: 250px; /* Width when expanded */
+  width: 300px; /* Width when expanded */
   height: calc(100vh - 200px); /* Full height minus navbar height */
-  top: 90px;
+  top: 111px;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.8) 75%, #000 100%);
 }
 
@@ -11491,12 +11491,43 @@ h4, h5 {
 }
 
 .pants-image {
-  max-width: 200px; /* Set the desired size for the pants image */
+  max-width: 400px; /* Set the desired size for the pants image */
   height: auto; /* Maintain aspect ratio */
   position: absolute; /* Position it absolutely */
-  top: 100px; /* Adjust this value to position above the shoe */
-  margin-left: -150px; /* Adjust this value to move it further left */
+  top: 140px; /* Adjust this value to position above the shoe */
+  margin-left: -80px; /* Adjust this value to move it further left */
   z-index: 10; /* Ensure it's above the shoe image */
+}
+
+/* color wheel styling */
+
+.color-wheel-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.color-wheel-container h1 {
+  margin-bottom: 20px;
+}
+
+.color-wheel-container div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+
+/* __________________________________ */
+/* VIEW ALL PRODUCTS STYLING */
+.view-all-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 1) 35%);
+  color: var(--bs-black); /* Adjust text color to make it visible on dark background */
 }
 
 

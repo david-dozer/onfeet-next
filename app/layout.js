@@ -6,9 +6,7 @@ export const metadata = {
   title: 'onFeet - Simplifying Sneaker Styles',
   description: 'A sneaker styling application',
   icons: {
-    icon: [
-      { url: '/aj1.ico', sizes: 'any' },
-    ],
+    icon: '/aj1.ico',  // Correct path to the icon
   },
 };
 

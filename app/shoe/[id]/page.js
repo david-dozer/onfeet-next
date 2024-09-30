@@ -3,7 +3,14 @@
 
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';  // Use usePathname to get the current URL pathname
-import SideBar from '../../../components/Sidebar'
+import SideBar from '../../../components/Sidebar';
+import { ClipLoader } from "react-spinners"; //
+
+const override = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "green",
+};
 
 const ShoeDetail = () => {
   const pathname = usePathname();  // Get the current pathname
@@ -43,11 +50,28 @@ const ShoeDetail = () => {
   }, [pathname]);  // Effect runs when pathname changes
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', 
+        background: 'linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 1) 35%)' }}>
+        <p style={{ color: 'red' }}>Error: {error}</p>
+      </div>
+    );
   }
 
   if (!product) {
-    return <p>Loading...</p>;
+    return (<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', 
+      background: 'linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 1) 35%)' }}>
+      <ClipLoader
+          color="green" // Change this to your preferred loading color
+          loading={!product} // Set loading state
+          // cssOverride={override}
+          size={150} // Adjust the size as needed
+          aria-label="Loading Spinner"
+          data-testid="loader"
+          speedMultiplier={1}
+        />
+        <p>Loading...</p>
+    </div>);
   }
 
   return (

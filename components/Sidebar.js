@@ -1,29 +1,24 @@
-// Sidebar.js
 "use client";
 
 import { useState } from 'react';
-import { ChromePicker } from 'react-color'; // Using ChromePicker for color selection
+import ColorWheelComponent from './ColorWheel'; // Import the Color Wheel Component
 
 const Sidebar = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);  // set back to false when deployed
   const [color, setColor] = useState('#ffffff'); // Default color for shorts
   const [isShortsChecked, setIsShortsChecked] = useState(false); // Default to false for shorts
   const [isPantsChecked, setIsPantsChecked] = useState(true); // Default to true for pants
-  const [selectedPantsType, setSelectedPantsType] = useState('jeans');
+  const [selectedPantsType, setSelectedPantsType] = useState('joggers');
   const [selectedSocksColor, setSelectedSocksColor] = useState('white');
 
   const toggleSidebar = () => {
     setIsExpanded(!isExpanded);
   };
 
-  const handleColorChange = (color) => {
-    setColor(color.hex); // Update the color based on the color picker
-  };
-
   return (
     <div className={`sidebar ${isExpanded ? 'expanded' : 'collapsed'}`}>
       <div className="toggle" onClick={toggleSidebar}>
-        {isExpanded ? '>' : '<'} {/* Change symbol based on state */}
+        {isExpanded ? '>' : '<'}
       </div>
       {isExpanded && (
         <div className="content">
@@ -53,6 +48,13 @@ const Sidebar = () => {
             </label>
           </div>
 
+          {isShortsChecked && (
+            <div>
+              <h5>Color Options</h5>
+              <ColorWheelComponent onChangeColor={setColor} /> {/* Color Wheel for Shorts */}
+            </div>
+          )}
+
           {isPantsChecked && (
             <div className="pants-options">
               <label>
@@ -66,70 +68,76 @@ const Sidebar = () => {
                 <div>
                   <h5>Color Options</h5>
                   <label>
-                    <input type="radio" name="jogger-color" value="earthstone" onChange={(e) => handleColorChange(e.target.value)} />
-                    Earthstone
+                    <input type="radio" name="jogger-color" value="earthstone" onChange={() => setColor('earthstone')} />
+                    Earthtone
                   </label>
                   <label>
-                    <input type="radio" name="jogger-color" value="black" onChange={(e) => handleColorChange(e.target.value)} />
+                    <input type="radio" name="jogger-color" value="black" onChange={() => setColor('black')} />
                     Black
                   </label>
                   <label>
-                    <input type="radio" name="jogger-color" value="navyblue" onChange={(e) => handleColorChange(e.target.value)} />
+                    <input type="radio" name="jogger-color" value="navyblue" onChange={() => setColor('navyblue')} />
                     Navy Blue
                   </label>
-                  <ChromePicker color={color} onChangeComplete={handleColorChange} />
+                  <ColorWheelComponent onChangeColor={setColor} /> {/* Color Wheel for Joggers */}
                 </div>
               )}
               {selectedPantsType === 'cargos' && (
                 <div>
                   <h5>Color Options</h5>
                   <label>
-                    <input type="radio" name="cargos-color" value="earthstone" onChange={(e) => handleColorChange(e.target.value)} />
+                    <input type="radio" name="cargos-color" value="earthstone" onChange={() => setColor('earthstone')} />
                     Earthstone
                   </label>
                   <label>
-                    <input type="radio" name="cargos-color" value="black" onChange={(e) => handleColorChange(e.target.value)} />
+                    <input type="radio" name="cargos-color" value="black" onChange={() => setColor('black')} />
                     Black
                   </label>
                   <label>
-                    <input type="radio" name="cargos-color" value="navyblue" onChange={(e) => handleColorChange(e.target.value)} />
+                    <input type="radio" name="cargos-color" value="navyblue" onChange={() => setColor('navyblue')} />
                     Navy Blue
                   </label>
-                  <ChromePicker color={color} onChangeComplete={handleColorChange} />
+                  <ColorWheelComponent onChangeColor={setColor} /> {/* Color Wheel for Cargos */}
                 </div>
               )}
               {selectedPantsType === 'jeans' && (
                 <div>
                   <h5>Jeans Color Options</h5>
                   <label>
-                    <input type="radio" name="jeans-color" value="lightblue" onChange={(e) => handleColorChange(e.target.value)} />
+                    <input type="radio" name="jeans-color" value="lightblue" onChange={() => setColor('lightblue')} />
                     Light Blue
                   </label>
                   <label>
-                    <input type="radio" name="jeans-color" value="darkblue" onChange={(e) => handleColorChange(e.target.value)} />
+                    <input type="radio" name="jeans-color" value="darkblue" onChange={() => setColor('darkblue')} />
                     Dark Blue
                   </label>
                   <label>
-                    <input type="radio" name="jeans-color" value="black" onChange={(e) => handleColorChange(e.target.value)} />
+                    <input type="radio" name="jeans-color" value="black" onChange={() => setColor('black')} />
                     Black
                   </label>
+                  <ColorWheelComponent onChangeColor={setColor} /> {/* Color Wheel for Jeans */}
                 </div>
               )}
             </div>
           )}
 
-          <h4>Socks</h4>
-          <div className="socks-options">
-            <label>
-              <input type="checkbox" checked={selectedSocksColor === 'white'} onChange={() => setSelectedSocksColor('white')} /> White
-            </label>
-            <label>
-              <input type="checkbox" checked={selectedSocksColor === 'black'} onChange={() => setSelectedSocksColor('black')} /> Black
-            </label>
-            <label>
-              <input type="checkbox" checked={selectedSocksColor === 'no-show'} onChange={() => setSelectedSocksColor('no-show')} /> No Show
-            </label>
-          </div>
+          {/* Show Socks selection only if Joggers or Shorts are selected */}
+          {(isShortsChecked || selectedPantsType === 'joggers') && (
+            <div>
+              <h4>Socks</h4>
+              <div className="socks-options">
+                <label>
+                  <input type="checkbox" checked={selectedSocksColor === 'white'} onChange={() => setSelectedSocksColor('white')} /> White
+                </label>
+                <label>
+                  <input type="checkbox" checked={selectedSocksColor === 'black'} onChange={() => setSelectedSocksColor('black')} /> Black
+                </label>
+                <label>
+                  <input type="checkbox" checked={selectedSocksColor === 'no-show'} onChange={() => setSelectedSocksColor('no-show')} /> No Show
+                </label>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
