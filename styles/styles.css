@@ -7462,6 +7462,10 @@ textarea.form-control-lg {
   height: 75% !important;
 }
 
+.h-85 {
+  height: 85% !important;
+}
+
 .h-100 {
   height: 100% !important;
 }
@@ -11098,21 +11102,50 @@ body {
 }
 .masthead h1, .masthead .h1 {
   font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-size: 2.5rem;
-  line-height: 2.5rem;
+  font-size: 4.5rem;
+  line-height: 4.5rem;
   letter-spacing: 0.8rem;
   background: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.05));
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
           background-clip: text;
 }
+
 .masthead h2, .masthead .h2 {
   max-width: 20rem;
-  font-size: 2rem;
+  max-width: fit-content; /* Ensure h2 takes up only the space it needs */
+  font-size: 1.75rem;
+  white-space: normal; /* Allow wrapping */
+  word-wrap: break-word; /* Ensure long text will wrap */
+  text-align: center; /* Center-align text to match the h1 */
+  margin: 0 auto; /* Center horizontally */
 }
+
+/* Specific styling for the typed text */
+.typed-text {
+  display: inline; /* Ensure the text and cursor are on the same line */
+  position: relative; /* Position relative for the cursor */
+  max-width: 50%; /* Ensure it does not exceed its parent width */
+  white-space: normal; /* Allow wrapping */
+  word-wrap: break-word; /* Ensure long typed strings wrap properly */
+}
+
+.typed-text::after {
+  content: '|'; /* Cursor character */
+  display: inline-block; /* Make the cursor behave like text */
+  animation: blink 0.7s step-end infinite; /* Blinking effect */
+  margin-left: 2px; /* Space between text and cursor */
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+
 @media (min-width: 768px) {
   .masthead h1, .masthead .h1 {
-    font-size: 4rem;
+    font-size: 5rem;
     line-height: 4rem;
   }
 }
@@ -11258,7 +11291,7 @@ body {
 .search {
   position: relative;
   width: 100%;
-  height: auto;
+  height: 100vh;
   min-height: 5rem;
   padding: 5rem 0;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.8) 75%, #000 100%);
@@ -11529,6 +11562,23 @@ h4, h5 {
   background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 1) 35%);
   color: var(--bs-black); /* Adjust text color to make it visible on dark background */
 }
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-in-out; /* Adjust duration and timing function as needed */
+}
+
+/* typed */
+
 
 
 

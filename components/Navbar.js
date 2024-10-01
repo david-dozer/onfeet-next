@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import '../styles/styles.css';
+import Image from 'next/image'; // Import Image from Next.js
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,6 +18,7 @@ const Navbar = () => {
 
   const scrollToTop = (e) => {
     e.preventDefault();
+    setIsOpen(false);
     if (pathname === '/') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
@@ -30,6 +32,7 @@ const Navbar = () => {
 
   const handleAboutClick = (e) => {
     e.preventDefault();
+    setIsOpen(false); // Close the dropdown
     if (pathname === '/') {
       const aboutSection = document.getElementById('about-section');
       if (aboutSection) {
@@ -47,6 +50,7 @@ const Navbar = () => {
 
   const handleExploreClick = (e) => {
     e.preventDefault();
+    setIsOpen(false); // Close the dropdown
     const searchBar = document.getElementById('search-bar');
     if (searchBar) {
       searchBar.value = '';
@@ -88,7 +92,7 @@ const Navbar = () => {
           aria-expanded={isOpen ? "true" : "false"}
           aria-label="Toggle navigation"
         >
-          Menu <i className="fas fa-bars"></i>
+        <Image src="/burger-menu.png" alt="Menu" width={24} height={24} />
         </button>
         <div className={`collapse navbar-collapse ${isOpen ? 'show' : ''}`} id="navbarResponsive">
           <ul className="navbar-nav ms-auto">

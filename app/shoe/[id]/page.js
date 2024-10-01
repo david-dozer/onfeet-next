@@ -80,12 +80,12 @@ const ShoeDetail = () => {
       <img 
         src="/pants/pants.png" // Path to the pants image in the public folder
         alt="Pants"
-        className="pants-image" // Add class for styling
+        className="fade-in pants-image" // Add class for styling
       />
       <img 
         src={product.thumbnail} 
         alt={product.shoeName} 
-        className="shoe-image"
+        className="fade-in shoe-image"
       />
       <p>{product.shoeName}</p>
       {/* <p>Retail Price: ${product.retailPrice}</p> */}
