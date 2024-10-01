@@ -3,7 +3,7 @@ import ColorWheel from '@uiw/react-color-wheel';
 // import './ColorWheel.css';
 
 const ColorWheelComponent = ({ onChangeColor }) => {
-  const [color, setColor] = useState('#ff0000');
+  const [color, setColor] = useState('#f0f0f0');
   const [brightness, setBrightness] = useState(100); 
 
   const handleChange = (newColor) => {

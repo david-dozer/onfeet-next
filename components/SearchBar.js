@@ -49,7 +49,7 @@ const SearchBar = () => {
 
   return (
     <div className="search">
-      <div className="container d-flex h-100 align-items-center justify-content-center">
+      <div className="container d-flex h-50 align-items-center justify-content-center">
         <div className="text-center">
           <h2 className="text-white-60 mx-auto mt-2 mb-5">Search Sneakers</h2>
           <input

@@ -393,6 +393,7 @@ button,
 [type=reset],
 [type=submit] {
   -webkit-appearance: button;
+  appearance: button; /* {{ edit_1 }} */
 }
 button:not(:disabled),
 [type=button]:not(:disabled),
@@ -451,6 +452,7 @@ legend + * {
 [type=search] {
   outline-offset: -2px;
   -webkit-appearance: textfield;
+  appearance: textfield;
 }
 
 /* rtl:raw:
@@ -472,6 +474,7 @@ legend + * {
 ::file-selector-button {
   font: inherit;
   -webkit-appearance: button;
+  appearance: button;
 }
 
 output {
@@ -2007,7 +2010,7 @@ progress {
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
-  background-color: #fff;
+  background-color: whitesmoke;
   background-clip: padding-box;
   border: 1px solid #ced4da;
   -webkit-appearance: none;
@@ -2029,7 +2032,7 @@ progress {
 }
 .form-control:focus {
   color: #212529;
-  background-color: #fff;
+  background-color: whitesmoke;
   border-color: #b2d0ce;
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgba(100, 161, 157, 0.25);
@@ -2334,95 +2337,62 @@ textarea.form-control-lg {
   opacity: 0.65;
 }
 
-.form-range {
-  width: 100%;
-  height: 1.5rem;
-  padding: 0;
-  background-color: transparent;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+/* Base styling for the range input */
+input[type="range"] {
+  -webkit-appearance: none; /* Removes default styling */
+  width: 100%; /* Full width */
+  height: 8px; /* Height of the track */
+  background: #ddd; /* Default background color of the track */
+  border-radius: 5px; /* Rounded corners for the track */
+  outline: none; /* Removes the outline */
 }
-.form-range:focus {
-  outline: 0;
+
+/* Style the thumb (handle) for WebKit browsers */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Removes default styling */
+  appearance: none; /* Removes default styling */
+  width: 20px; /* Width of the thumb */
+  height: 20px; /* Height of the thumb */
+  background: #ddd; /* Green color for the thumb */
+  border-radius: 50%; /* Makes the thumb circular */
+  cursor: pointer; /* Pointer cursor on hover */
 }
-.form-range:focus::-webkit-slider-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgba(100, 161, 157, 0.25);
+
+/* Style the track for Firefox */
+input[type="range"]::-moz-range-track {
+  width: 100%; /* Full width */
+  height: 8px; /* Height of the track */
+  background: #ddd; /* Default background color of the track */
+  border-radius: 5px; /* Rounded corners for the track */
 }
-.form-range:focus::-moz-range-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgba(100, 161, 157, 0.25);
+
+/* Style the thumb (handle) for Firefox */
+input[type="range"]::-moz-range-thumb {
+  width: 20px; /* Width of the thumb */
+  height: 20px; /* Height of the thumb */
+  background: green; /* Green color for the thumb */
+  border-radius: 50%; /* Makes the thumb circular */
+  cursor: pointer; /* Pointer cursor on hover */
 }
-.form-range::-moz-focus-outer {
-  border: 0;
+
+/* Style the track for Internet Explorer */
+input[type="range"]::-ms-track {
+  width: 100%; /* Full width */
+  height: 8px; /* Height of the track */
+  background: #ddd; /* Default background color of the track */
+  border-radius: 5px; /* Rounded corners for the track */
+  border: none; /* Remove border */
 }
-.form-range::-webkit-slider-thumb {
-  width: 1rem;
-  height: 1rem;
-  margin-top: -0.25rem;
-  background-color: #64a19d;
-  border: 0;
-  border-radius: 1rem;
-  -webkit-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  -webkit-appearance: none;
-          appearance: none;
+
+/* Style the thumb (handle) for Internet Explorer */
+input[type="range"]::-ms-thumb {
+  width: 20px; /* Width of the thumb */
+  height: 20px; /* Height of the thumb */
+  background: green; /* Green color for the thumb */
+  border-radius: 50%; /* Makes the thumb circular */
+  cursor: pointer; /* Pointer cursor on hover */
 }
-@media (prefers-reduced-motion: reduce) {
-  .form-range::-webkit-slider-thumb {
-    -webkit-transition: none;
-    transition: none;
-  }
-}
-.form-range::-webkit-slider-thumb:active {
-  background-color: #d1e3e2;
-}
-.form-range::-webkit-slider-runnable-track {
-  width: 100%;
-  height: 0.5rem;
-  color: transparent;
-  cursor: pointer;
-  background-color: #dee2e6;
-  border-color: transparent;
-  border-radius: 1rem;
-}
-.form-range::-moz-range-thumb {
-  width: 1rem;
-  height: 1rem;
-  background-color: #64a19d;
-  border: 0;
-  border-radius: 1rem;
-  -moz-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  -moz-appearance: none;
-       appearance: none;
-}
-@media (prefers-reduced-motion: reduce) {
-  .form-range::-moz-range-thumb {
-    -moz-transition: none;
-    transition: none;
-  }
-}
-.form-range::-moz-range-thumb:active {
-  background-color: #d1e3e2;
-}
-.form-range::-moz-range-track {
-  width: 100%;
-  height: 0.5rem;
-  color: transparent;
-  cursor: pointer;
-  background-color: #dee2e6;
-  border-color: transparent;
-  border-radius: 1rem;
-}
-.form-range:disabled {
-  pointer-events: none;
-}
-.form-range:disabled::-webkit-slider-thumb {
-  background-color: #adb5bd;
-}
-.form-range:disabled::-moz-range-thumb {
-  background-color: #adb5bd;
-}
+
 
 .form-floating {
   position: relative;
@@ -11359,6 +11329,7 @@ body {
   overflow-y: auto;
   width: 70%;
   margin: 0 auto; /* Center the dropdown */
+  margin-left: 200px;
 }
 
 .search-item {
@@ -11523,7 +11494,25 @@ h4, h5 {
   color: #f8f9fa;
 }
 
-.pants-image {
+.cargo-pants-image {
+  max-width: 400px; /* Set the desired size for the pants image */
+  height: auto; /* Maintain aspect ratio */
+  position: absolute; /* Position it absolutely */
+  top: 140px; /* Adjust this value to position above the shoe */
+  margin-left: -80px; /* Adjust this value to move it further left */
+  z-index: 10; /* Ensure it's above the shoe image */
+}
+
+.jogger-pants-image {
+  max-width: 400px; /* Set the desired size for the pants image */
+  height: auto; /* Maintain aspect ratio */
+  position: absolute; /* Position it absolutely */
+  top: 140px; /* Adjust this value to position above the shoe */
+  margin-left: -80px; /* Adjust this value to move it further left */
+  z-index: 10; /* Ensure it's above the shoe image */
+}
+
+.jeans-image {
   max-width: 400px; /* Set the desired size for the pants image */
   height: auto; /* Maintain aspect ratio */
   position: absolute; /* Position it absolutely */
@@ -11573,9 +11562,23 @@ h4, h5 {
   }
 }
 
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 .fade-in {
   animation: fadeIn 1s ease-in-out; /* Adjust duration and timing function as needed */
 }
+
+.fade-out {
+  animation: fadeOut 1s ease-in-out; /* Adjust duration and timing function as needed */
+}
+
 
 /* typed */
 

@@ -1,35 +1,28 @@
-// app/shoe/[id]/page.js
 "use client";
 
 import { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';  // Use usePathname to get the current URL pathname
+import { usePathname } from 'next/navigation';  
 import SideBar from '../../../components/Sidebar';
-import { ClipLoader } from "react-spinners"; //
-
-const override = {
-  display: "block",
-  margin: "0 auto",
-  borderColor: "green",
-};
+import { ClipLoader } from "react-spinners"; 
 
 const ShoeDetail = () => {
-  const pathname = usePathname();  // Get the current pathname
+  const pathname = usePathname();  
   const [product, setProduct] = useState(null);
   const [error, setError] = useState('');
+  const [selectedPantsType, setSelectedPantsType] = useState('joggers');
+  const [animationKey, setAnimationKey] = useState(0); // State to trigger fade-in
+  const [isFadingOut, setIsFadingOut] = useState(false); // State for fade-out effect
 
   useEffect(() => {
     const fetchProduct = async () => {
-      // Extract the id from the URL
-      const id = pathname?.split('/').pop(); // Extract the id from the pathname
+      const id = pathname?.split('/').pop(); 
 
-      // Ensure that the id is valid
       if (!id) {
         setError('Invalid ID: could not extract ID from URL');
         return;
       }
 
       try {
-        // Fetch the product data
         const response = await fetch(`/api/sneakers/${id}`);
 
         if (!response.ok) {
@@ -37,17 +30,27 @@ const ShoeDetail = () => {
         }
 
         const data = await response.json();
-        setProduct(data);  // Set the fetched product data in state
+        setProduct(data); 
       } catch (err) {
         setError(err.message);
       }
     };
 
-    // Only call fetchProduct when pathname is available
     if (pathname) {
       fetchProduct();
     }
-  }, [pathname]);  // Effect runs when pathname changes
+  }, [pathname]); 
+
+  const handlePantsChange = (newType) => {
+    setIsFadingOut(true); // Start fade-out effect
+
+    // Delay setting the new pants type to allow fade-out to complete
+    setTimeout(() => {
+      setSelectedPantsType(newType);
+      setAnimationKey(prev => prev + 1); // Increment key to trigger animation
+      setIsFadingOut(false); // End fade-out effect
+    }, 750); // Adjust the timeout duration to match your fade-out animation duration
+  };
 
   if (error) {
     return (
@@ -59,40 +62,57 @@ const ShoeDetail = () => {
   }
 
   if (!product) {
-    return (<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', 
-      background: 'linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 1) 35%)' }}>
-      <ClipLoader
-          color="green" // Change this to your preferred loading color
-          loading={!product} // Set loading state
-          // cssOverride={override}
-          size={150} // Adjust the size as needed
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', 
+        background: 'linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 1) 35%)' }}>
+        <ClipLoader
+          color="green" 
+          loading={!product} 
+          size={150} 
           aria-label="Loading Spinner"
           data-testid="loader"
-          speedMultiplier={1}
+          speedMultiplier={0.5}
         />
         <p>Loading...</p>
-    </div>);
+      </div>
+    );
   }
+
+  // Dynamically set the pants image based on selectedPantsType
+  const pantsImageSrc = selectedPantsType === 'joggers'
+    ? '/pants/joggers.png'
+    : selectedPantsType === 'cargos'
+    ? '/pants/cargo_pants.png'
+    : selectedPantsType === 'jeans'
+    ? '/pants/jeans.png'
+    : '';
 
   return (
     <div className="shoe-detail-container">
-      <SideBar /> {/* Include the sidebar here */}
+      <SideBar setSelectedPantsType={handlePantsChange} /> {/* Pass down the handler */}
+      
+      {/* Render selected pants type image dynamically with fade-out and fade-in effects */}
       <img 
-        src="/pants/pants.png" // Path to the pants image in the public folder
-        alt="Pants"
-        className="fade-in pants-image" // Add class for styling
+        key={animationKey} // Use key to trigger animation
+        src={pantsImageSrc} 
+        alt={`${selectedPantsType.charAt(0).toUpperCase() + selectedPantsType.slice(1)} Image`} 
+        className={`fade-in pants-image ${isFadingOut ? 'fade-out' : ''} ${
+          selectedPantsType === 'cargos' ? 'cargo-pants-image' : 
+          selectedPantsType === 'joggers' ? 'jogger-pants-image' : 
+          selectedPantsType === 'jeans' ? 'jeans-image' : ''
+        }`}
       />
+      
+      {/* Only render the shoe image */}
       <img 
+        // key={animationKey} // Use the same key to trigger animation
         src={product.thumbnail} 
         alt={product.shoeName} 
-        className="fade-in shoe-image"
+        className={`fade-in shoe-image ${isFadingOut ? 'fade-out' : ''}`} 
       />
       <p>{product.shoeName}</p>
-      {/* <p>Retail Price: ${product.retailPrice}</p> */}
-      {/* <p>Release Date: {product.releaseDate}</p> */}
     </div>
   );
-  
 };
 
 export default ShoeDetail;

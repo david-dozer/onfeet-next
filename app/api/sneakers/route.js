@@ -16,7 +16,7 @@ export async function GET(request) {
   try {
     return new Promise((resolve) => {
       // Fetch products from the external API
-      sneaks.getProducts(query, 25, async (err, products) => {
+      sneaks.getProducts(query, 50, async (err, products) => {
         if (err) {
           resolve(NextResponse.json({ error: 'Failed to fetch products from API' }, { status: 500 }));
         } else if (products.length > 0) {
