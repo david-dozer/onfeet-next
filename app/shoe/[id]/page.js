@@ -9,7 +9,7 @@ const ShoeDetail = () => {
   const pathname = usePathname();  
   const [product, setProduct] = useState(null);
   const [error, setError] = useState('');
-  const [selectedPantsType, setSelectedPantsType] = useState('joggers');
+  const [selectedPantsType, setSelectedPantsType] = useState('jeans');
   const [animationKey, setAnimationKey] = useState(0); // State to trigger fade-in
   const [isFadingOut, setIsFadingOut] = useState(false); // State for fade-out effect
 
@@ -80,11 +80,11 @@ const ShoeDetail = () => {
 
   // Dynamically set the pants image based on selectedPantsType
   const pantsImageSrc = selectedPantsType === 'joggers'
-    ? '/pants/joggers.png'
+    ? '/pants/joggers_refined.png'
     : selectedPantsType === 'cargos'
     ? '/pants/cargo_pants.png'
     : selectedPantsType === 'jeans'
-    ? '/pants/jeans.png'
+    ? '/pants/jeans_refined1.png'
     : '';
 
   return (
