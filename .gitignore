@@ -17,7 +17,7 @@ public/shoe
 /coverage
 
 # SQLite database
-database/sneakers.db
+# database/sneakers.db
 
 
 #python

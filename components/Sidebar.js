@@ -4,7 +4,7 @@ import { useState } from 'react';
 import ColorWheelComponent from './ColorWheel'; // Import the Color Wheel Component
 
 const Sidebar = ({ setSelectedPantsType }) => {  // Accept the setter as a prop
-  const [isExpanded, setIsExpanded] = useState(true);  // set back to false when deployed
+  const [isExpanded, setIsExpanded] = useState(false);  // set back to false when deployed
   const [color, setColor] = useState('#ffffff'); // Default color for pants
   const [selectedPantsType, setSelectedPantsTypeLocal] = useState('jeans');
   const [jeansColor, setJeansColor] = useState('blue'); // Default color for jeans
