@@ -27,25 +27,24 @@ const SearchBar = () => {
 
   const handleProductClick = async (product) => {
     console.log('Product clicked:', product);
-
-    // Send the product data to the API
-    const response = await fetch(`/api/sneakers/${product._id}`, {
+  
+    // Send the product data to the API using the urlKey
+    const response = await fetch(`/api/sneakers/${product.urlKey}`, {
       method: 'POST',  // POST to send the product data
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(product),  // Send the full product data to the API
     });
-
+  
     if (response.ok) {
-      // Redirect to the shoe details page once the data has been passed
+      // Redirect to the shoe details page using urlKey instead of _id
       console.log('Product posted successfully:', product); // Log the success message
-      router.push(`/shoe/${product._id}`);
+      router.push(`/shoe/${product.urlKey}`);
     } else {
       console.error('Failed to send product data to the API');
     }
-  };
-  
+  };  
 
   return (
     <div className="search">

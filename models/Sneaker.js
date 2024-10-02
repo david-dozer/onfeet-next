@@ -1,25 +1,42 @@
 import mongoose from 'mongoose';
 
-// Define the schema for the sneaker
-const SneakerSchema = new mongoose.Schema({
+const { Schema } = mongoose;
+
+const SneakerSchema = new Schema({
   shoeName: String,
   brand: String,
-  styleID: String,
+  silhoutte: String,
+  styleID: String, 
   retailPrice: Number,
-  lowestResellPrice: {
-    stockX: Number,
-    flightClub: Number,
-    goat: Number,
-  },
-  thumbnail: String,
-  description: String,
   releaseDate: String,
+  description: String,
+  imageLinks: [String],
+  thumbnail: String,
+  urlKey: String,
+  make: String,
+  goatProductId: Number,
+  colorway: String,
   resellLinks: {
     stockX: String,
-    flightClub: String,
+    stadiumGoods: String,
     goat: String,
+    flightClub: String
   },
+  size: Number,
+  lowestResellPrice: {
+    stockX: Number,
+    stadiumGoods: Number,
+    goat: Number,
+    flightClub: Number
+  },
+  resellPrices: {
+    stockX: {},
+    goat: {},
+    stadiumGoods: {},
+    flightClub: {}
+  }
 });
 
-// Use the existing compiled model if it exists, otherwise create a new one
-export default mongoose.models.Sneaker || mongoose.model('Sneaker', SneakerSchema);
+const Sneaker = mongoose.models.Sneaker || mongoose.model('Sneaker', SneakerSchema);
+
+export default Sneaker;

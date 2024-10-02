@@ -20,7 +20,9 @@
     "@uiw/react-color-wheel": "^2.3.2",
     "better-sqlite3": "^11.3.0",
     "bootstrap": "^5.3.3",
+    "bson": "^6.8.0",
     "changed-sneaks-api": "^1.2.0",
+    "mongodb": "^6.9.0",
     "mongoose": "^8.6.3",
     "next": "^14.2.13",
     "onfeet-next": "file:",
@@ -38,5 +40,8 @@
     "@types/lodash": "^4.17.9",
     "eslint": "^8",
     "eslint-config-next": "14.2.11"
+  },
+  "resolutions": {
+    "bson": "^6.8.0"
   }
 }

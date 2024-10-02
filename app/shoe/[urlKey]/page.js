@@ -1,3 +1,4 @@
+// app/shoe/[urlKey]/page.js
 "use client";
 
 import { useEffect, useState } from 'react';
@@ -15,31 +16,31 @@ const ShoeDetail = () => {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const id = pathname?.split('/').pop(); 
-
-      if (!id) {
-        setError('Invalid ID: could not extract ID from URL');
+      const urlKey = pathname?.split('/').pop(); // Extract shoeName from URL
+  
+      if (!urlKey) {
+        setError('Invalid shoeName: could not extract shoeName from URL');
         return;
       }
-
+  
       try {
-        const response = await fetch(`/api/sneakers/${id}`);
-
+        const response = await fetch(`/api/sneakers/${urlKey}`);
+  
         if (!response.ok) {
           throw new Error(`Failed to fetch product: ${response.status}`);
         }
-
+  
         const data = await response.json();
-        setProduct(data); 
+        setProduct(data); // Store product data
       } catch (err) {
         setError(err.message);
       }
     };
-
+  
     if (pathname) {
       fetchProduct();
     }
-  }, [pathname]); 
+  }, [pathname]); // Re-fetch when pathname changes 
 
   const handlePantsChange = (newType) => {
     setIsFadingOut(true); // Start fade-out effect
