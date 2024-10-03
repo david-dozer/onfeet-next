@@ -11080,6 +11080,7 @@ body {
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
           background-clip: text;
+  filter: brightness(1.5); /* Apply brightness directly */
 }
 
 .masthead h2, .masthead .h2 {
@@ -11090,19 +11091,8 @@ body {
   word-wrap: break-word; /* Ensure long text will wrap */
   text-align: center; /* Center-align text to match the h1 */
   margin: 0 auto; /* Center horizontally */
+  filter: brightness(1.5); /* Apply brightness directly */
 }
-
-/* Media query for mobile devices */
-@media (max-width: 450px) and (max-height: 1000px) {
-  .masthead h1, .masthead .h1 {
-    filter: brightness(1.2); /* Adjust brightness */
-  }
-
-  .masthead h2, .masthead .h2 {
-    filter: brightness(1.2); /* Adjust brightness */
-  }
-}
-
 
 /* Specific styling for the typed text */
 .typed-text {
