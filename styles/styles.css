@@ -11096,7 +11096,7 @@ body {
 /* Media query for mobile devices */
 @media (max-width: 450px) and (max-height: 1000px) {
   .masthead {
-    filter: brightness(1.5); /* Adjust brightness */
+    filter: brightness(1.75); /* Adjust brightness */
   }
 }
 
