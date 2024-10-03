@@ -9,7 +9,7 @@ const ShoeDetail = () => {
   const pathname = usePathname();
   const [product, setProduct] = useState(null);
   const [error, setError] = useState('');
-  const [selectedPantsType, setSelectedPantsType] = useState('jeans');
+  const [selectedPantsType, setSelectedPantsType] = useState('cargos');
   const [animationKey, setAnimationKey] = useState(0); 
   const [isFadingOut, setIsFadingOut] = useState(false);
   const [pantsPosition, setPantsPosition] = useState({ x: 0, y: 0 });
@@ -84,7 +84,7 @@ const ShoeDetail = () => {
   // Handle touch move event
   const handleTouchMove = (e) => {
     if (isDragging) {
-      e.preventDefault(); // Prevent default scrolling behavior
+      // e.preventDefault(); // Prevent default scrolling behavior
       const touch = e.touches[0];
       setPantsPosition({
         x: touch.clientX - startDragPos.x,
