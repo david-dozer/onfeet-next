@@ -8244,6 +8244,11 @@ input[type="range"]::-ms-thumb {
   color: rgba(255, 255, 255, 0.6) !important;
 }
 
+.text-white-80 {
+  --bs-text-opacity: 1;
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
 .text-reset {
   --bs-text-opacity: 1;
   color: inherit !important;
@@ -11146,17 +11151,11 @@ body {
 }
 
 .about-section {
+  position: relative; /* Required for positioning the pseudo-element */
   padding-top: 10rem;
   padding-bottom: 5rem;
-  background: 
-      linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.9) 75%, rgba(0, 0, 0, 0.8) 100%),
-      url("/assets/img/kobebhm.png") no-repeat center center;
-  background-blend-mode: overlay; /* Ensures gradient and image blend smoothly */
-  background-size: contain; /* Makes the image cover the entire section */
-  background-position: center; /* Centers the image */
-  background-repeat: no-repeat; /* Prevents the image from repeating */
   min-height: 100vh; /* Makes the section take up full viewport height */
-  filter: brightness(0.89); /* Reduces the brightness of the background image */
+  color: whitesmoke; /* Set text color */
 }
 
 .about-section::before {
@@ -11166,20 +11165,24 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Black overlay with 50% opacity to fade the image */
-  z-index: 1;
+  background: 
+      linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.9) 75%, rgba(0, 0, 0, 0.8) 100%),
+      url("/assets/img/kobebhm.png") no-repeat center center;
+  background-size: contain; /* Makes the image cover the entire section */
+  background-blend-mode: overlay; /* Ensures gradient and image blend smoothly */
+  filter: brightness(0.4); /* Fade the background image */
+  z-index: 1; /* Position it behind the content */
 }
 
 .about-section .container {
   position: relative;
   z-index: 2; /* Ensure content appears above the overlay */
-  color: white;
 }
-
 
 .about-section p {
   margin-bottom: 5rem;
 }
+
 
 .projects-section {
   padding: 10rem 0;
