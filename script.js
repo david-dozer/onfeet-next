@@ -6,7 +6,7 @@ const pantsCtx = pantsCanvas.getContext('2d');
 
 // Load the pants image
 const pantsImage = new Image();
-pantsImage.src = 'public/pants/joggers_refined.png'; // Update the path as needed
+pantsImage.src = 'public/pants/cargo_pants.png'; // Update the path as needed
 
 pantsImage.onload = () => {
     // Draw the pants image on the pantsCanvas once it's loaded
