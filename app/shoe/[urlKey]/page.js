@@ -53,11 +53,13 @@ const ShoeDetail = () => {
     }, 750);
   };
 
+  // Handle mouse down event
   const handleMouseDown = (e) => {
     setIsDragging(true);
     setStartDragPos({ x: e.clientX - pantsPosition.x, y: e.clientY - pantsPosition.y });
   };
 
+  // Handle mouse move event
   const handleMouseMove = (e) => {
     if (isDragging) {
       setPantsPosition({
@@ -67,7 +69,31 @@ const ShoeDetail = () => {
     }
   };
 
+  // Handle mouse up event
   const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  // Handle touch start event
+  const handleTouchStart = (e) => {
+    const touch = e.touches[0];
+    setIsDragging(true);
+    setStartDragPos({ x: touch.clientX - pantsPosition.x, y: touch.clientY - pantsPosition.y });
+  };
+
+  // Handle touch move event
+  const handleTouchMove = (e) => {
+    if (isDragging) {
+      const touch = e.touches[0];
+      setPantsPosition({
+        x: touch.clientX - startDragPos.x,
+        y: touch.clientY - startDragPos.y,
+      });
+    }
+  };
+
+  // Handle touch end event
+  const handleTouchEnd = () => {
     setIsDragging(false);
   };
 
@@ -97,7 +123,13 @@ const ShoeDetail = () => {
     : '';
 
   return (
-    <div className="shoe-detail-container" onMouseMove={handleMouseMove} onMouseUp={handleMouseUp}>
+    <div 
+      className="shoe-detail-container" 
+      onMouseMove={handleMouseMove} 
+      onMouseUp={handleMouseUp}
+      onTouchMove={handleTouchMove} 
+      onTouchEnd={handleTouchEnd}
+    >
       <SideBar setSelectedPantsType={handlePantsChange} />
       
       <img
@@ -116,6 +148,7 @@ const ShoeDetail = () => {
           cursor: 'grab' 
         }}
         onMouseDown={handleMouseDown}
+        onTouchStart={handleTouchStart}
       />
       
       <img
