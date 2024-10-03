@@ -84,6 +84,7 @@ const ShoeDetail = () => {
   // Handle touch move event
   const handleTouchMove = (e) => {
     if (isDragging) {
+      e.preventDefault(); // Prevent default scrolling behavior
       const touch = e.touches[0];
       setPantsPosition({
         x: touch.clientX - startDragPos.x,
