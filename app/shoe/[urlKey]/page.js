@@ -146,7 +146,8 @@ const ShoeDetail = () => {
           left: `${pantsPosition.x}px`, 
           top: `${pantsPosition.y}px`, 
           position: 'absolute', 
-          cursor: 'grab' 
+          cursor: 'grab',
+          touchAction: 'none'  // Prevent scrolling during drag 
         }}
         onMouseDown={handleMouseDown}
         onTouchStart={handleTouchStart}
