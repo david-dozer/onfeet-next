@@ -15,6 +15,16 @@ const ShoeDetail = () => {
   const [pantsPosition, setPantsPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [startDragPos, setStartDragPos] = useState({ x: 0, y: 0 });
+  const [isLoading, setIsLoading] = useState(true); // New state to manage loading delay
+
+  useEffect(() => {
+    // Set a timeout for 5 seconds to simulate loading delay
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -106,20 +116,10 @@ const ShoeDetail = () => {
     );
   }
 
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    // Set a timeout for 5 seconds before stopping the loading spinner
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 5000);
-
-    return () => clearTimeout(timer); // Clean up the timer when the component unmounts
-  }, []);
-
-  if (!product || isLoading) {
+  if (isLoading || !product) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', background: 'linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 1) 35%)' }}>
-        <ClipLoader color="green" loading={isLoading} size={150} aria-label="Loading Spinner" data-testid="loader" speedMultiplier={0.5} />
+        <ClipLoader color="green" loading={isLoading || !product} size={150} aria-label="Loading Spinner" data-testid="loader" speedMultiplier={0.5} />
         <p>Loading...</p>
         <p>*Pants may not render correctly onFeet, feel free to drag the pants on screen for your best fit.</p>
       </div>

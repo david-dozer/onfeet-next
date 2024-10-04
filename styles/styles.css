@@ -11560,18 +11560,18 @@ body {
   height: auto; 
   position: absolute; 
   top: 30vh; /* Adjusted for responsiveness */
-  margin-left: 34.3vw; /* Responsive positioning */
-  margin-top: 25vh;
+  margin-left: 34vw; /* Responsive positioning */
+  margin-top: 23vh;
   z-index: 10; 
 }
 
 .jeans-image {
-  max-width: 30vw; /* Responsive width */
+  max-width: 28.0vw; /* Responsive width */
   height: auto; 
   position: absolute; 
   top: 20vh; /* Adjusted for responsiveness */
-  margin-left: 35vw; /* Responsive positioning */
-  margin-top: 27vh;
+  margin-left: 35.5vw; /* Responsive positioning */
+  margin-top: 31vh;
   z-index: 10; 
 }
 
