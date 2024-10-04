@@ -14,7 +14,7 @@ export async function GET(request) {
   try {
     // Search in the external SneaksAPI
     const products = await new Promise((resolve, reject) => {
-      sneaks.getProducts(query, 50, (err, products) => {
+      sneaks.getProducts(query, 30, (err, products) => {
         if (err) {
           console.error('Error fetching products from SneaksAPI:', err);
           reject(err);
