@@ -1,37 +1,36 @@
-### OnFeet - Simplifying Sneaker Styling
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# [onFeet - Simplifying Sneaker Styling](https://onfeet-next.vercel.app/)
 
-## Getting Started
+## Overview
+**onFeet** is a styling application designed to help users visualize how shoes look with various types of pants and shorts. By integrating sneaker data from STOCKX and utilizing a sleek, user-friendly interface, onFeet aims to enhance the sneaker shopping experience.
 
-First, run the development server:
+## Tech Stack
+- **Next.js**: For server-side rendering
+- **Bootstrap**: To ensure a responsive and modern UI.
+- **Modified Sneaks API**: Fetches sneaker information and popularity metrics from STOCKX.
+- **MongoDB**: Used for sneaker database management.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
+- **Bootstrap Landing Page**: 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Search/Explore Page**: 
+  - Search functionality with dropdown suggestions based on user input.
+  - Links to a detailed `Sneaker` page for each product.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- **Sneaker Page**:
+  - Displays detailed sneaker information including make, name, average retail price, release date, and external purchase links.
+  - Interactive styling options to choose between shorts or pants, and adjust colors in real-time using a color picker.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deployment
+- Hosted on **Vercel** for seamless deployment and performance.
 
-## Learn More
+## Future Plans
+- Will be on onFeet.com
+- User account management via Firebase for saving favorite shoes and styles.
+- Integration of AI to suggest styles based on shoe colorways.
+- Migration from SQLite to MongoDB for better scalability.
+- Potential features like Google Lens integration for visual shoe searches.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/david-dozer/onfeet-next.git
