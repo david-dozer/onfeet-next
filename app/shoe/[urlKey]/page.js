@@ -21,7 +21,7 @@ const ShoeDetail = () => {
     // Set a timeout for 5 seconds to simulate loading delay
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 5000);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, []);

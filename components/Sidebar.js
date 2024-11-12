@@ -1,15 +1,15 @@
 "use client";
 
 import { useState } from 'react';
-import ColorWheelComponent from './ColorWheel'; // Import the Color Wheel Component
+import ColorWheelComponent from './ColorWheel';
 
-const Sidebar = ({ setSelectedPantsType }) => {  // Accept the setter as a prop
-  const [isExpanded, setIsExpanded] = useState(false);  // set back to false when deployed
-  const [color, setColor] = useState('#ffffff'); // Default color for pants
+const Sidebar = ({ setSelectedPantsType, setPantsColor }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [color, setColor] = useState('#ffffff');
   const [selectedPantsType, setSelectedPantsTypeLocal] = useState('cargos');
-  const [jeansColor, setJeansColor] = useState('blue'); // Default color for jeans
-  const [cargosColor, setCargosColor] = useState('grey'); // Default color for cargos
-  const [joggersColor, setJoggersColor] = useState('grey'); // Default color for joggers
+  const [jeansColor, setJeansColor] = useState('blue');
+  const [cargosColor, setCargosColor] = useState('grey');
+  const [joggersColor, setJoggersColor] = useState('grey');
 
   const toggleSidebar = () => {
     setIsExpanded(!isExpanded);
@@ -17,20 +17,20 @@ const Sidebar = ({ setSelectedPantsType }) => {  // Accept the setter as a prop
 
   const handlePantsChange = (e) => {
     const newType = e.target.value;
-    setSelectedPantsType(newType);  // Update the parent component's state
-    setSelectedPantsTypeLocal(newType);  // Update local state for rendering
+    setSelectedPantsType(newType);
+    setSelectedPantsTypeLocal(newType);
   };
 
   const handleJeansColorChange = (e) => {
-    setJeansColor(e.target.value); // Update the jeans color state
+    setJeansColor(e.target.value);
   };
 
   const handleCargosColorChange = (e) => {
-    setCargosColor(e.target.value); // Update the cargos color state
+    setCargosColor(e.target.value);
   };
 
   const handleJoggersColorChange = (e) => {
-    setJoggersColor(e.target.value); // Update the joggers color state
+    setJoggersColor(e.target.value);
   };
 
   return (
@@ -41,20 +41,6 @@ const Sidebar = ({ setSelectedPantsType }) => {  // Accept the setter as a prop
       {isExpanded && (
         <div className="content">
           <h4>Bottoms</h4>
-          {/* Commenting out the checkbox group for pants */}
-          {/* <div className="checkbox-group">
-            <label>
-              <input 
-                type="checkbox" 
-                checked={isPantsChecked} 
-                onChange={() => {
-                  setIsPantsChecked(true);
-                }} 
-              />
-              Pants
-            </label>
-          </div> */}
-
           <div className="pants-options">
             <label>
               <select value={selectedPantsType} onChange={handlePantsChange}>
@@ -87,16 +73,6 @@ const Sidebar = ({ setSelectedPantsType }) => {  // Accept the setter as a prop
                   />
                   Black
                 </label>
-                
-                {/* Add a brightness slider */}
-                <h5>Brightness</h5>
-                <input 
-                  type="range" 
-                  min="0" 
-                  max="100" 
-                  value={color.brightness} // Assuming you want to track brightness
-                  onChange={(e) => setColor({...color, brightness: e.target.value})}
-                />
               </div>
             )}
 
@@ -172,11 +148,10 @@ const Sidebar = ({ setSelectedPantsType }) => {  // Accept the setter as a prop
               </div>
             )}
 
-            {/* For other pants types (Cargos, Joggers) */}
             {selectedPantsType !== 'jeans' && (
               <div>
                 <h5>Color Options</h5>
-                <ColorWheelComponent onChangeColor={setColor} /> {/* Color Wheel for selected pants */}
+                <ColorWheelComponent onChangeColor={setPantsColor} />
               </div>
             )}
           </div>
