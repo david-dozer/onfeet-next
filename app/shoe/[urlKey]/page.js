@@ -9,6 +9,8 @@ const ShoeDetail = () => {
   const pathname = usePathname();
   const [product, setProduct] = useState(null);
   const [error, setError] = useState('');
+  const [selectedColor, setSelectedColor] = useState('hsl(0, 100%, 50%)'); // New state for selected color
+  const [coloredPantsSrc, setColoredPantsSrc] = useState(''); // Initialize state for colored pants image
   const [selectedPantsType, setSelectedPantsType] = useState('cargos');
   const [animationKey, setAnimationKey] = useState(0); 
   const [isFadingOut, setIsFadingOut] = useState(false);
@@ -62,6 +64,50 @@ const ShoeDetail = () => {
       setIsFadingOut(false);
     }, 750);
   };
+
+  const handleColorChange = (color) => {
+    setSelectedColor(color); // Update the selected color
+  };
+
+  const pantsImageSrc = selectedPantsType === 'joggers'
+  ? '/pants/joggers_refined.png'
+  : selectedPantsType === 'cargos'
+  ? '/pants/cargo_pants.png'
+  : selectedPantsType === 'jeans'
+  ? '/pants/jeans_refined1.png'
+  : '';
+
+  // Function to apply color to pants
+  const applyColorToPants = (pantsImageSrc, selectedColor) => {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const image = new Image();
+    image.src = pantsImageSrc;
+
+    image.onload = () => {
+      canvas.width = image.width;
+      canvas.height = image.height;
+      ctx.drawImage(image, 0, 0);
+
+      ctx.globalCompositeOperation = 'source-atop';
+      ctx.globalAlpha = 0.5; // Set opacity for blending
+      ctx.fillStyle = selectedColor;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.globalAlpha = 1;
+
+      setColoredPantsSrc(canvas.toDataURL());
+    };
+  };
+
+
+
+  useEffect(() => {
+    if (pantsImageSrc) {
+      applyColorToPants(pantsImageSrc, selectedColor);
+    }
+  }, [pantsImageSrc, selectedColor]);
 
   // Handle mouse down event
   const handleMouseDown = (e) => {
@@ -126,14 +172,6 @@ const ShoeDetail = () => {
     );
   }
 
-  const pantsImageSrc = selectedPantsType === 'joggers'
-    ? '/pants/joggers_refined.png'
-    : selectedPantsType === 'cargos'
-    ? '/pants/cargo_pants.png'
-    : selectedPantsType === 'jeans'
-    ? '/pants/jeans_refined1.png'
-    : '';
-
   return (
     <div 
       className="shoe-detail-container" 
@@ -142,10 +180,10 @@ const ShoeDetail = () => {
       onTouchMove={handleTouchMove} 
       onTouchEnd={handleTouchEnd}
     >
-      <SideBar setSelectedPantsType={handlePantsChange} />
+      <SideBar setSelectedPantsType={handlePantsChange} setSelectedColor={handleColorChange} />
       <img
         key={animationKey}
-        src={pantsImageSrc}
+        src={coloredPantsSrc}
         alt={`${selectedPantsType.charAt(0).toUpperCase() + selectedPantsType.slice(1)} Image`}
         className={`fade-in pants-image ${isFadingOut ? 'fade-out' : ''} ${
           selectedPantsType === 'cargos' ? 'cargo-pants-image' : 

@@ -8,7 +8,9 @@ const ColorWheelComponent = ({ onChangeColor }) => {
 
   const handleChange = (newColor) => {
     setColor(newColor.hex);
-    onChangeColor(newColor.hex); // Pass color back to Sidebar
+    if (typeof onChangeColor === 'function') {
+      onChangeColor(newColor.hex); // Pass color back to parent component
+    }
   };
 
   const adjustBrightness = (color, brightness) => {
