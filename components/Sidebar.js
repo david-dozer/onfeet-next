@@ -3,9 +3,8 @@
 import { useState } from 'react';
 import ColorWheelComponent from './ColorWheel';
 
-const Sidebar = ({ setSelectedPantsType, setSelectedColor }) => {
+const Sidebar = ({ setSelectedPantsType, setAdjustedColor }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [color, setColor] = useState('#ffffff');
   const [selectedPantsType, setSelectedPantsTypeLocal] = useState('cargos');
   const [jeansColor, setJeansColor] = useState('blue');
   const [cargosColor, setCargosColor] = useState('grey');
@@ -36,7 +35,7 @@ const Sidebar = ({ setSelectedPantsType, setSelectedColor }) => {
   return (
     <div className={`sidebar ${isExpanded ? 'expanded' : 'collapsed'}`}>
       <div className="toggle" onClick={toggleSidebar}>
-        {isExpanded ? '>' : '<'}
+        {isExpanded ? 'Collapse >' : '<'}
       </div>
       {isExpanded && (
         <div className="content">
@@ -151,7 +150,9 @@ const Sidebar = ({ setSelectedPantsType, setSelectedColor }) => {
             {selectedPantsType !== 'jeans' && (
               <div>
                 <h5>Color Options</h5>
-                <ColorWheelComponent onChangeColor={setSelectedColor} />
+                <ColorWheelComponent 
+                  onChangeAdjustedColor={setAdjustedColor} // Pass setAdjustedColor to ColorWheelComponent
+                />
               </div>
             )}
           </div>

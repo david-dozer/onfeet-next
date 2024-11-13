@@ -1,17 +1,9 @@
 import React, { useState } from 'react';
 import ColorWheel from '@uiw/react-color-wheel';
-// import './ColorWheel.css';
 
-const ColorWheelComponent = ({ onChangeColor }) => {
+const ColorWheelComponent = ({ onChangeAdjustedColor }) => {
   const [color, setColor] = useState('#f0f0f0');
-  const [brightness, setBrightness] = useState(100); 
-
-  const handleChange = (newColor) => {
-    setColor(newColor.hex);
-    if (typeof onChangeColor === 'function') {
-      onChangeColor(newColor.hex); // Pass color back to parent component
-    }
-  };
+  const [brightness, setLocalBrightness] = useState(100); 
 
   const adjustBrightness = (color, brightness) => {
     const rgb = parseInt(color.slice(1), 16); // Convert hex to RGB
@@ -26,12 +18,22 @@ const ColorWheelComponent = ({ onChangeColor }) => {
     return `#${((1 << 24) + (newR << 16) + (newG << 8) + newB).toString(16).slice(1)}`;
   };
 
-  const handleBrightnessChange = (event) => {
-    setBrightness(event.target.value);
+  const handleChange = (newColor) => {
+    setColor(newColor.hex);
+    const adjustedColor = adjustBrightness(newColor.hex, brightness);
+    if (typeof onChangeAdjustedColor === 'function') {
+      onChangeAdjustedColor(adjustedColor); // Pass adjusted color back to parent component
+    }
   };
 
-  // Adjust brightness function remains unchanged
-  const adjustedColor = adjustBrightness(color, brightness);
+  const handleBrightnessChange = (event) => {
+    const newBrightness = event.target.value;
+    setLocalBrightness(newBrightness);
+    const adjustedColor = adjustBrightness(color, newBrightness);
+    if (typeof onChangeAdjustedColor === 'function') {
+      onChangeAdjustedColor(adjustedColor); // Update parent with adjusted color
+    }
+  };
 
   return (
     <div className="color-wheel-container">
@@ -39,12 +41,11 @@ const ColorWheelComponent = ({ onChangeColor }) => {
       <div style={{ 
         width: '30px', 
         height: '30px', 
-        backgroundColor: adjustedColor, 
+        backgroundColor: adjustBrightness(color, brightness), 
         border: '1px solid #fff', 
         marginTop: '10px' 
       }}></div> 
-      {/* Updated to a square */}
-      <div style={{ display: 'flex', alignItems: 'center' }}> {/* Flex container */}
+      <div style={{ display: 'flex', alignItems: 'center' }}>
         <label style={{ color: '#f8f9fa', marginRight: '5px' }}>Brightness:</label>
         <input 
             type="range" 
@@ -53,9 +54,9 @@ const ColorWheelComponent = ({ onChangeColor }) => {
             value={brightness} 
             onChange={handleBrightnessChange} 
         />
-        </div>
+      </div>
     </div>
-    );
+  );
 };
 
 export default ColorWheelComponent;

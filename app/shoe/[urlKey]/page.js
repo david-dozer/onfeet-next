@@ -9,7 +9,7 @@ const ShoeDetail = () => {
   const pathname = usePathname();
   const [product, setProduct] = useState(null);
   const [error, setError] = useState('');
-  const [selectedColor, setSelectedColor] = useState('hsl(0, 100%, 50%)'); // New state for selected color
+  const [adjustedColor, setAdjustedColor] = useState(''); // New state for adjusted color
   const [coloredPantsSrc, setColoredPantsSrc] = useState(''); // Initialize state for colored pants image
   const [selectedPantsType, setSelectedPantsType] = useState('cargos');
   const [animationKey, setAnimationKey] = useState(0); 
@@ -65,10 +65,6 @@ const ShoeDetail = () => {
     }, 750);
   };
 
-  const handleColorChange = (color) => {
-    setSelectedColor(color); // Update the selected color
-  };
-
   const pantsImageSrc = selectedPantsType === 'joggers'
   ? '/pants/joggers_refined.png'
   : selectedPantsType === 'cargos'
@@ -78,7 +74,11 @@ const ShoeDetail = () => {
   : '';
 
   // Function to apply color to pants
-  const applyColorToPants = (pantsImageSrc, selectedColor) => {
+  const applyColorToPants = (pantsImageSrc, adjustedColor) => {
+    if (!adjustedColor) {
+      setColoredPantsSrc(pantsImageSrc); // Use original image if no color is selected
+      return;
+    }
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     const image = new Image();
@@ -91,7 +91,7 @@ const ShoeDetail = () => {
 
       ctx.globalCompositeOperation = 'source-atop';
       ctx.globalAlpha = 0.5; // Set opacity for blending
-      ctx.fillStyle = selectedColor;
+      ctx.fillStyle = adjustedColor;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       ctx.globalCompositeOperation = 'source-over';
@@ -101,13 +101,11 @@ const ShoeDetail = () => {
     };
   };
 
-
-
   useEffect(() => {
     if (pantsImageSrc) {
-      applyColorToPants(pantsImageSrc, selectedColor);
+      applyColorToPants(pantsImageSrc, adjustedColor);
     }
-  }, [pantsImageSrc, selectedColor]);
+  }, [pantsImageSrc, adjustedColor]);
 
   // Handle mouse down event
   const handleMouseDown = (e) => {
@@ -165,7 +163,7 @@ const ShoeDetail = () => {
   if (isLoading || !product) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', background: 'linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 1) 35%)' }}>
-        <ClipLoader color="green" loading={isLoading || !product} size={150} aria-label="Loading Spinner" data-testid="loader" speedMultiplier={0.5} />
+        <ClipLoader color="green" loading={isLoading || !product} size={125} aria-label="Loading Spinner" data-testid="loader" speedMultiplier={0.5} />
         <p>Loading...</p>
         <p>*Pants may not render correctly onFeet, feel free to drag the pants on screen for your best fit.</p>
       </div>
@@ -180,7 +178,10 @@ const ShoeDetail = () => {
       onTouchMove={handleTouchMove} 
       onTouchEnd={handleTouchEnd}
     >
-      <SideBar setSelectedPantsType={handlePantsChange} setSelectedColor={handleColorChange} />
+      <SideBar 
+        setSelectedPantsType={handlePantsChange} 
+        setAdjustedColor={setAdjustedColor} // Pass setAdjustedColor to SideBar
+      />
       <img
         key={animationKey}
         src={coloredPantsSrc}
@@ -206,7 +207,7 @@ const ShoeDetail = () => {
         alt={product.shoeName}
         className={`fade-in shoe-image ${isFadingOut ? 'fade-out' : ''}`}
       />
-      <p>{product.shoeName}</p>
+      {/* <p>{product.shoeName}</p> */}
     </div>
   );
 };
