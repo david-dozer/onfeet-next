@@ -60,6 +60,7 @@ const ShoeDetail = () => {
     setIsFadingOut(true); 
     setTimeout(() => {
       setSelectedPantsType(newType);
+      setAdjustedColor(''); // Reset adjusted color to ensure origin
       setAnimationKey(prev => prev + 1); 
       setIsFadingOut(false);
     }, 750);

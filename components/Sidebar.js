@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ColorWheelComponent from './ColorWheel';
 
 const Sidebar = ({ setSelectedPantsType, setAdjustedColor }) => {
@@ -20,17 +20,34 @@ const Sidebar = ({ setSelectedPantsType, setAdjustedColor }) => {
     setSelectedPantsTypeLocal(newType);
   };
 
-  const handleJeansColorChange = (e) => {
-    setJeansColor(e.target.value);
+  const handleJeansColorChange = (color) => {
+    setJeansColor(color);
+    setAdjustedColor(color === 'black' ? '#1a1919' : ''); // Dark grey for black jeans, original for blue
   };
 
-  const handleCargosColorChange = (e) => {
-    setCargosColor(e.target.value);
+  const handleCargosColorChange = (color) => {
+    setCargosColor(color);
+    setAdjustedColor(color === 'earthtone' ? '#5e5140' : color === 'black' ? '#000000' : ''); // Tan for earthtone, black for black
   };
 
-  const handleJoggersColorChange = (e) => {
-    setJoggersColor(e.target.value);
+  const handleJoggersColorChange = (color) => {
+    setJoggersColor(color);
+    setAdjustedColor(color === 'navy' ? '#09143d' : color === 'black' ? '#000000' : ''); // Navy for navy, black for black
   };
+
+  // Set initial color based on selected pants type
+  useEffect(() => {
+    if (selectedPantsType === 'jeans') {
+      setJeansColor('blue');
+      setAdjustedColor(''); // Original image for blue
+    } else if (selectedPantsType === 'cargos') {
+      setCargosColor('grey');
+      setAdjustedColor(''); // Original image for grey
+    } else if (selectedPantsType === 'joggers') {
+      setJoggersColor('grey');
+      setAdjustedColor(''); // Original image for grey
+    }
+  }, [selectedPantsType, setAdjustedColor]);
 
   return (
     <div className={`sidebar ${isExpanded ? 'expanded' : 'collapsed'}`}>
@@ -58,7 +75,7 @@ const Sidebar = ({ setSelectedPantsType, setAdjustedColor }) => {
                     name="jeans-color" 
                     value="blue" 
                     checked={jeansColor === 'blue'} 
-                    onChange={handleJeansColorChange} 
+                    onChange={() => handleJeansColorChange('blue')} 
                   />
                   Blue
                 </label>
@@ -68,7 +85,7 @@ const Sidebar = ({ setSelectedPantsType, setAdjustedColor }) => {
                     name="jeans-color" 
                     value="black" 
                     checked={jeansColor === 'black'} 
-                    onChange={handleJeansColorChange} 
+                    onChange={() => handleJeansColorChange('black')} 
                   />
                   Black
                 </label>
@@ -84,7 +101,7 @@ const Sidebar = ({ setSelectedPantsType, setAdjustedColor }) => {
                     name="cargos-color" 
                     value="earthtone" 
                     checked={cargosColor === 'earthtone'} 
-                    onChange={handleCargosColorChange} 
+                    onChange={() => handleCargosColorChange('earthtone')} 
                   />
                   Earthtone
                 </label>
@@ -94,7 +111,7 @@ const Sidebar = ({ setSelectedPantsType, setAdjustedColor }) => {
                     name="cargos-color" 
                     value="black" 
                     checked={cargosColor === 'black'} 
-                    onChange={handleCargosColorChange} 
+                    onChange={() => handleCargosColorChange('black')} 
                   />
                   Black
                 </label>
@@ -104,7 +121,7 @@ const Sidebar = ({ setSelectedPantsType, setAdjustedColor }) => {
                     name="cargos-color" 
                     value="grey" 
                     checked={cargosColor === 'grey'} 
-                    onChange={handleCargosColorChange} 
+                    onChange={() => handleCargosColorChange('grey')} 
                   />
                   Grey
                 </label>
@@ -120,7 +137,7 @@ const Sidebar = ({ setSelectedPantsType, setAdjustedColor }) => {
                     name="joggers-color" 
                     value="navy" 
                     checked={joggersColor === 'navy'} 
-                    onChange={handleJoggersColorChange} 
+                    onChange={() => handleJoggersColorChange('navy')} 
                   />
                   Navy
                 </label>
@@ -130,7 +147,7 @@ const Sidebar = ({ setSelectedPantsType, setAdjustedColor }) => {
                     name="joggers-color" 
                     value="black" 
                     checked={joggersColor === 'black'} 
-                    onChange={handleJoggersColorChange} 
+                    onChange={() => handleJoggersColorChange('black')} 
                   />
                   Black
                 </label>
@@ -140,7 +157,7 @@ const Sidebar = ({ setSelectedPantsType, setAdjustedColor }) => {
                     name="joggers-color" 
                     value="grey" 
                     checked={joggersColor === 'grey'} 
-                    onChange={handleJoggersColorChange} 
+                    onChange={() => handleJoggersColorChange('grey')} 
                   />
                   Grey
                 </label>

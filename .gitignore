@@ -21,6 +21,8 @@ database/sneakers.db
 
 goat.py
 
+.vscode/launch.json
+
 #python
 output_image.png
 backend/__pycache__

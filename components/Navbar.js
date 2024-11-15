@@ -55,7 +55,7 @@ const Navbar = () => {
     if (searchBar) {
       searchBar.value = '';
     }
-    router.push('/try-me', undefined, { shallow: false });
+    router.push('/search', undefined, { shallow: false });
   };
 
   useEffect(() => {

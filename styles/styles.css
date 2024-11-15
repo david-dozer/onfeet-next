@@ -11566,7 +11566,7 @@ body {
 }
 
 .jeans-image {
-  max-width: 28.0vw; /* Responsive width */
+  max-width: 26.0vw; /* Responsive width */
   height: auto; 
   position: absolute; 
   top: 20vh; /* Adjusted for responsiveness */
