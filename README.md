@@ -14,7 +14,7 @@
 
 - **Search/Explore Page**: 
   - Search functionality with dropdown suggestions based on user input.
-  - Links to a detailed `Sneaker` page for each product.
+  - Links to a detailed `Sneaker` styling page for each product.
 
 - **Sneaker Page**:
   - Displays detailed sneaker information including make, name, average retail price, release date, and external purchase links.
@@ -27,7 +27,6 @@
 - Will be on onFeet.com
 - User account management via Firebase for saving favorite shoes and styles.
 - Integration of AI to suggest styles based on shoe colorways.
-- Migration from SQLite to MongoDB for better scalability.
 - Potential features like Google Lens integration for visual shoe searches.
 
 ## Installation
